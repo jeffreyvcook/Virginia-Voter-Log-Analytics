@@ -1,0 +1,23 @@
+%h1 List of Elections
+
+%table{:style=>"text-align:center"}
+  %tr
+    %th ID
+    %th Name
+    %th Date
+    %th
+    %th
+    %th
+
+  - @elections.each do |election|
+    %tr
+      %td{:style=>"padding-right:6px;padding-left:6px"}= election.id
+      %td{:style=>"padding-right:6px;padding-left:6px"}= election.name
+      %td{:style=>"padding-right:6px;padding-left:6px"}= election.day
+      %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Show', election
+      %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Select', election, :method => :selec
+      %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Destroy', election, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Election', new_election_path

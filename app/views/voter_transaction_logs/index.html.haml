@@ -1,0 +1,28 @@
+%h1 List of Voter Transaction Logs
+
+%table{:style=>"text-align:center"}
+  %tr
+    %th EID
+    %th ID
+    %th Origin
+    %th Uniq
+    %th Date
+    %th Locale
+    %th
+    %th
+    %th
+
+  - @voter_transaction_logs.each do |voter_transaction_log|
+    %tr
+      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_log.election_id
+      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_log.id
+      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_log.origin
+      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_log.origin_uniq
+      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_log.datime
+      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_log.locale
+      %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Show', voter_transaction_log
+      %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Destroy', voter_transaction_log, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Voter Transaction Log', new_voter_transaction_log_path

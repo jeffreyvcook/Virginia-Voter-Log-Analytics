@@ -1,0 +1,28 @@
+%p#notice= notice
+
+%p
+  %b Voter:
+  = @voter_transaction_record.voter
+%p
+  %b Vtype:
+  = @voter_transaction_record.vtype
+%p
+  %b Date:
+  = @voter_transaction_record.datime
+%p
+  %b Action:
+  = @voter_transaction_record.action
+%p
+  %b Form:
+  = @voter_transaction_record.form
+%p
+  %b Leo:
+  = @voter_transaction_record.leo
+%p
+  %b Note:
+  = @voter_transaction_record.note
+%p
+  %b VTL ID:
+  = @voter_transaction_record.voter_transaction_log.id
+
+= link_to 'Back', voter_transaction_records_path

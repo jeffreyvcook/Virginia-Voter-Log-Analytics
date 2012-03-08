@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Eid:
+  = @selection.eid
+%p
+  %b Ename:
+  = @selection.ename
+
+= link_to 'Edit', edit_selection_path(@selection)
+\|
+= link_to 'Back', selections_path

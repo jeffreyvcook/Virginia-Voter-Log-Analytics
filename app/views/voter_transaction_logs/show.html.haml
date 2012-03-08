@@ -1,0 +1,19 @@
+%p#notice= notice
+
+%p
+  %b Origin:
+  = @voter_transaction_log.origin
+%p
+  %b Uniq:
+  = @voter_transaction_log.origin_uniq
+%p
+  %b Date:
+  = @voter_transaction_log.datime
+%p
+  %b Locale:
+  = @voter_transaction_log.locale
+%p
+  %b Elec ID:
+  = @voter_transaction_log.election.id
+
+= link_to 'Back', voter_transaction_logs_path

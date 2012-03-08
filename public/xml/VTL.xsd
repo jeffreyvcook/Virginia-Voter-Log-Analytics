@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="voterTransactionLog">
+    <xs:complexType>
+      <xs:sequence>
+	<xs:element name="header">
+	  <xs:complexType>
+	    <xs:all>
+	      <xs:element name="origin" type="xs:string"/>
+	      <xs:element name="originUniq" type="xs:string" minOccurs="0"/>
+	      <xs:element name="date" type="xs:dateTime"/>
+	      <xs:element name="locale" type="localeType"/>
+	    </xs:all>
+	  </xs:complexType>
+	</xs:element>
+	<xs:element name="voterTransactionRecord" minOccurs="0" maxOccurs="unbounded">
+	  <xs:complexType>
+	    <xs:all>
+	      <xs:element name="voter" type="xs:string"/>
+	      <xs:element name="vtype" type="voterType" minOccurs="0"/>
+	      <xs:element name="date" type="xs:dateTime"/>
+	      <xs:element name="action" type="actionType"/>
+	      <xs:element name="form" type="formType" minOccurs="0"/>
+	      <xs:element name="leo" type="xs:string" minOccurs="0"/>
+	      <xs:element name="note" type="xs:string" minOccurs="0"/>
+	    </xs:all>
+	  </xs:complexType>
+	</xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="voterType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="UOCAVA"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="actionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="online-identify"/>
+      <xs:enumeration value="online-request"/>
+      <xs:enumeration value="online-discard"/>
+      <xs:enumeration value="online-complete"/>
+      <xs:enumeration value="online-submit"/>
+      <xs:enumeration value="online-receive"/>
+      <xs:enumeration value="identify-offline"/>
+      <xs:enumeration value="receive-offline"/>
+      <xs:enumeration value="approve-offline"/>
+      <xs:enumeration value="reject-offline"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="formType">
+    <xs:sequence>
+      <xs:element name="type" type="formTypeType" minOccurs="1" maxOccurs="2"/>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+      <xs:element name="number" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="formTypeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Voter Registration"/>
+      <xs:enumeration value="Voter Record Update"/>
+      <xs:enumeration value="Absentee Request"/>
+      <xs:enumeration value="Absentee Ballot"/>
+      <xs:enumeration value="Provisional Ballot"/>
+      <xs:enumeration value="Poll Book"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="localeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Alabama"/>
+      <xs:enumeration value="Alaska"/>
+      <xs:enumeration value="Arizona"/>
+      <xs:enumeration value="Arkansas"/>
+      <xs:enumeration value="California"/>
+      <xs:enumeration value="Colorado"/>
+      <xs:enumeration value="Connecticut"/>
+      <xs:enumeration value="Delaware"/>
+      <xs:enumeration value="Florida"/>
+      <xs:enumeration value="Georgia"/>
+      <xs:enumeration value="Hawaii"/>
+      <xs:enumeration value="Idaho"/>
+      <xs:enumeration value="Illinois"/>
+      <xs:enumeration value="Indiana"/>
+      <xs:enumeration value="Iowa"/>
+      <xs:enumeration value="Kansas"/>
+      <xs:enumeration value="Kentucky"/>
+      <xs:enumeration value="Louisiana"/>
+      <xs:enumeration value="Maine"/>
+      <xs:enumeration value="Maryland"/>
+      <xs:enumeration value="Massachusetts"/>
+      <xs:enumeration value="Michigan"/>
+      <xs:enumeration value="Minnesota"/>
+      <xs:enumeration value="Mississippi"/>
+      <xs:enumeration value="Missouri"/>
+      <xs:enumeration value="Montana"/>
+      <xs:enumeration value="Nebraska"/>
+      <xs:enumeration value="Nevada"/>
+      <xs:enumeration value="New Hampshire"/>
+      <xs:enumeration value="New Jersey"/>
+      <xs:enumeration value="New Mexico"/>
+      <xs:enumeration value="New York"/>
+      <xs:enumeration value="North Carolina"/>
+      <xs:enumeration value="North Dakota"/>
+      <xs:enumeration value="Ohio"/>
+      <xs:enumeration value="Oklahoma"/>
+      <xs:enumeration value="Oregon"/>
+      <xs:enumeration value="Pennsylvania"/>
+      <xs:enumeration value="Rhode Island"/>
+      <xs:enumeration value="South Carolina"/>
+      <xs:enumeration value="South Dakota"/>
+      <xs:enumeration value="Tennessee"/>
+      <xs:enumeration value="Texas"/>
+      <xs:enumeration value="Utah"/>
+      <xs:enumeration value="Vermont"/>
+      <xs:enumeration value="Virginia"/>
+      <xs:enumeration value="Washington"/>
+      <xs:enumeration value="Washington DC"/>
+      <xs:enumeration value="West Virginia"/>
+      <xs:enumeration value="Wisconsin"/>
+      <xs:enumeration value="Wyoming"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @election.name
+%p
+  %b Date:
+  = @election.day
+
+= link_to 'Back', elections_path
+\|
+= link_to 'List All', elections_path

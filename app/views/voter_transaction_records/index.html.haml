@@ -1,0 +1,34 @@
+%h1 List of Voter Transaction Records
+
+%table{:style=>"text-align:center"}
+  %tr
+    %th VID
+    %th ID
+    %th Voter
+    %th V-Type
+    %th Date
+    %th Action
+    %th Form
+    %th Leo
+    %th Note
+    %th
+    %th
+    %th
+
+  - @voter_transaction_records.each do |voter_transaction_record|
+    %tr
+      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.voter_transaction_log.id
+      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.id
+      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.voter
+      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.vtype
+      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.datime
+      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.action
+      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.form
+      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.leo
+      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.note
+      %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Show', voter_transaction_record
+      %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Destroy', voter_transaction_record, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Voter Transaction Record', new_voter_transaction_record_path
