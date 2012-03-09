@@ -7,13 +7,15 @@
       %h2 Virginia Voter Log Analytics
 
       .row
-        .span4= "Election: "+(((Election.all.length == 0) && "None Selected") || Election.all[0].name+" ("+Election.all[0].day.to_s+")")
+        .span4
+          %h3
+            = "Election: "+(((Selection.all.length == 0) && "None Selected") || Selection.all[0].ename)
         .span4
           %p
             = link_to "Manage Elections",'elections#new', class: 'primary btn'
           %p
-            = link_to "Manage VTLs",'voter_transaction_logs#new', class: 'primary btn'
-            = link_to "Manage VTRs",'voter_transaction_records#new', class: 'primary btn'
+            = link_to "Browse Logs",'voter_transaction_logs#new', class: 'primary btn'
+            = link_to "Browse Records",'voter_transaction_records#new', class: 'primary btn'
 
   .row.main
     .span4.sidebar

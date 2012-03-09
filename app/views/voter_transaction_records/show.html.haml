@@ -1,28 +1,35 @@
 %p#notice= notice
 
-%p
-  %b Voter:
-  = @voter_transaction_record.voter
-%p
-  %b Vtype:
-  = @voter_transaction_record.vtype
-%p
-  %b Date:
-  = @voter_transaction_record.datime
-%p
-  %b Action:
-  = @voter_transaction_record.action
-%p
-  %b Form:
-  = @voter_transaction_record.form
-%p
-  %b Leo:
-  = @voter_transaction_record.leo
-%p
-  %b Note:
-  = @voter_transaction_record.note
-%p
-  %b VTL ID:
-  = @voter_transaction_record.voter_transaction_log.id
+%h3
+  Voter Transaction Record
+%br
+
+%table
+  %tr
+    %td{:style=>"font-weight:bold;padding-right:10px;padding-bottom:6px;"}
+      Voter:
+    %td{:style=>"padding-bottom:6px;"}= @voter_transaction_record.voter+(@voter_transaction_record.vtype.length > 0 ? " (Type: "+@voter_transaction_record.vtype+")" : "")
+  %tr
+    %td{:style=>"font-weight:bold;padding-right:10px;padding-bottom:6px;"}
+      Date:
+    %td{:style=>"padding-bottom:6px;"}= @voter_transaction_record.datime
+  %tr
+    %td{:style=>"font-weight:bold;padding-right:10px;padding-bottom:6px;"}
+      Action:
+    %td{:style=>"padding-bottom:6px;"}= @voter_transaction_record.action
+  %tr
+    %td{:style=>"font-weight:bold;padding-right:10px;padding-bottom:6px;"}
+      Form:
+    %td{:style=>"padding-bottom:6px;"}= @voter_transaction_record.form
+  %tr
+    %td{:style=>"font-weight:bold;padding-right:10px;padding-bottom:6px;"}
+      LEO:
+    %td{:style=>"padding-bottom:6px;"}= @voter_transaction_record.leo
+  %tr
+    %td{:style=>"font-weight:bold;padding-right:10px;padding-bottom:10px;"}
+      Note:
+    %td{:style=>"padding-bottom:10px;"}= @voter_transaction_record.note
+
+%br
 
 = link_to 'Back', voter_transaction_records_path

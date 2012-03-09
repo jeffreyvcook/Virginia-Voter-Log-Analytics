@@ -1,24 +1,20 @@
-%h1 List of Voter Transaction Records
+%h3 All Voter Transaction Records
+%br
 
 %table{:style=>"text-align:center"}
   %tr
-    %th VID
-    %th ID
     %th Voter
-    %th V-Type
+    %th Voter Type
     %th Date
     %th Action
     %th Form
-    %th Leo
+    %th LEO
     %th Note
-    %th
     %th
     %th
 
   - @voter_transaction_records.each do |voter_transaction_record|
     %tr
-      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.voter_transaction_log.id
-      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.id
       %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.voter
       %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.vtype
       %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.datime

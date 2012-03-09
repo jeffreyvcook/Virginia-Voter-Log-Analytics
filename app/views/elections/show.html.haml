@@ -1,11 +1,44 @@
 %p#notice= notice
 
-%p
-  %b Name:
-  = @election.name
-%p
-  %b Date:
-  = @election.day
+%h3
+  Election
+%br
+
+%table{:style=>"padding:10px"}
+  %tr
+    %td{:style=>"font-weight:bold;padding-right:10px;padding-bottom:6px;"}
+      Name:
+    %td{:style=>"padding-bottom:6px;"}= @election.name
+  %tr
+    %td{:style=>"font-weight:bold;padding-right:10px;padding-bottom:10px;"}
+      Date:
+    %td{:style=>"padding-bottom:10px;"}= @election.day
+
+%br
+%h3
+  Voter Transaction Logs
+%br
+
+%table{:style=>"text-align:center"}
+  %tr
+    %th Date
+    %th Origin
+    %th Origin UID
+    %th Locale
+    %th
+    %th
+    %th
+
+  - @election.voter_transaction_logs.each do |vtl|
+    %tr
+      %td{:style=>"padding-right:6px;padding-left:6px"}= vtl.datime
+      %td{:style=>"padding-right:6px;padding-left:6px"}= vtl.origin
+      %td{:style=>"padding-right:6px;padding-left:6px"}= vtl.origin_uniq
+      %td{:style=>"padding-right:6px;padding-left:6px"}= vtl.locale
+      %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Show', vtl
+      %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Destroy', vtl, :confirm => 'Are you sure?', :method => :delete
+
+%br
 
 = link_to 'Back', elections_path
 \|
