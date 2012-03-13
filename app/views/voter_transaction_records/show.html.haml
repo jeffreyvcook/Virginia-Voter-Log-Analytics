@@ -1,8 +1,11 @@
 %p#notice= notice
 
-%h3
-  Voter Transaction Record
-%br
+.row
+  .span4
+    %h3
+      Voter Transaction Record 
+  .span4
+    %b= button_to "Download XML", "#{Rails.root}/app/views/voter_transaction_records/"+voter_transaction_records_path(format: 'xml')
 
 %table
   %tr
@@ -29,6 +32,11 @@
     %td{:style=>"font-weight:bold;padding-right:10px;padding-bottom:10px;"}
       Note:
     %td{:style=>"padding-bottom:10px;"}= @voter_transaction_record.note
+
+%table
+  - @voter_transaction_record.to_voter_xml_spaced().each do |vtr|
+    %tr
+      %td= vtr
 
 %br
 

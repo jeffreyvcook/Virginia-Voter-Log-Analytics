@@ -10,6 +10,24 @@ class VoterTransactionRecordsController < ApplicationController
     end
   end
 
+  # Stream a file that has already been generated and stored on disk
+  def download
+    @voter_transaction_record = VoterTransactionRecord.find(params[:id])
+    
+    send_data("#{RAILS_ROOT}/public/downloads/vtr.xml", :filename => "vtr.xml",
+              :type => "application/xml")
+  end
+
+  def disp
+    @voter_transaction_record = VoterTransactionRecord.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @voter_transaction_record }
+    end
+
+  end
+
   # GET /voter_transaction_records/1
   # GET /voter_transaction_records/1.json
   def show
@@ -80,4 +98,26 @@ class VoterTransactionRecordsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+   # http://vitobotta.com/more-methods-format-beautify-ruby-output-console-logs/
+  def xp(xml_text)
+    xsl = <<XSL
+  <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
+    <xsl:strip-space elements="*"/>
+    <xsl:template match="/">
+      <xsl:copy-of select="."/>
+    </xsl:template>
+  </xsl:stylesheet>
+
+XSL
+
+    doc  = Nokogiri::XML(xml_text)
+    xslt = Nokogiri::XSLT(xsl)
+    out  = xslt.transform(doc)
+    File.open("public/downloads/vtr.xml", "w") do |aFile|
+      aFile.puts out.to_xml
+    end
+  end
+
 end

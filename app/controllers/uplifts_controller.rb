@@ -6,6 +6,7 @@ class UpliftsController < ApplicationController
 
   def uplift
     @uplift_msg = ""
+    @uplift_xml = ""
     @uplift_err = ""
     unless params['file']
       @uplift_msg = "Error: choose file name"
@@ -35,7 +36,7 @@ class UpliftsController < ApplicationController
     end
     errors = schema.validate(document)
     if (errors.length > 0)
-      @uplift_err = "Validation Errors: "      
+      @uplift_err += "Validation Errors: "      
       errors.each { |e| @uplift_err += e.message }
       render :uplift
     else
@@ -49,7 +50,7 @@ class UpliftsController < ApplicationController
       end
     end
   rescue => e
-    @uplift_err = "Should't happen #2: "+e.message # JVC temp
+    @uplift_err += "Should't happen #2: "+e.message # JVC temp
   end
 
   def contentOrEmptyStr(xml)
@@ -83,21 +84,27 @@ class UpliftsController < ApplicationController
       leo = self.contentOrEmptyStr(vtr % 'leo')
       note = self.contentOrEmptyStr(vtr % 'note')
       form = ""
-      first = true
+      first = 0
       if (node = vtr % 'form')
         (node / 'type').each do |type|
-          if first
+          if (first == 0)
             form = type.content
-            first = false
-          else
-            form += ", "+type.content
+            first = 1
+          elsif (first == 1)
+            form += " | "+type.content
+            first = 2
           end
         end
-        if (item = self.contentOrEmptyStr(node % 'name'))
-          form += ", "+item
+        if (first == 1)
+          form += " | "
         end
+        form += " | "
+        if (item = self.contentOrEmptyStr(node % 'name'))
+          form += item
+        end
+        form += " | "
         if (item = self.contentOrEmptyStr(node % 'number'))
-          form += ", "+item
+          form += item
         end
       end
       vtr = VoterTransactionRecord.new(:datime => datime, :voter => voter,
@@ -111,7 +118,27 @@ class UpliftsController < ApplicationController
         return false
       end
     end
+    vtl.save
+    #@uplift_xml = vtl.to_voter_xml()
     return true
+  end
+
+  def xp(xml_text) # from http://vitobotta.com/more-methods-format-beautify-ruby-output-console-logs/
+    xsl = <<XSL
+  <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
+    <xsl:strip-space elements="*"/>
+    <xsl:template match="/">
+      <xsl:copy-of select="."/>
+    </xsl:template>
+  </xsl:stylesheet>
+
+XSL
+
+    doc  = Nokogiri::XML(xml_text)
+    xslt = Nokogiri::XSLT(xsl)
+    out  = xslt.transform(doc)
+    puts out.to_xml
   end
 
   def readXMLSchema
@@ -128,7 +155,7 @@ class UpliftsController < ApplicationController
     document = Nokogiri::XML(File.read(document_path))
     return document
   rescue => e
-    @uplift_err = "Invalid File format: "+e.message
+    @uplift_err += "Invalid File format: "+e.message
     render :uplift
     return false
   end

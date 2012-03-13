@@ -1,11 +1,8 @@
 VoterLogAnalytics::Application.routes.draw do
   resources :selections
-
-  resources :voter_transaction_records
-
-  resources :voter_transaction_logs
-
   resources :elections
+  resources :voter_transaction_logs
+  resources :voter_transaction_records
 
 #  get "pages/front"
   root :to => "pages#front"
@@ -31,6 +28,16 @@ VoterLogAnalytics::Application.routes.draw do
     member do
       get :index
       get :edit
+      get :show
+      get :new
+    end
+  end
+
+  resource :voter_transaction_record, only: [], path: '' do
+    member do
+      get :index
+      get :edit
+      get :create
       get :show
       get :new
     end
