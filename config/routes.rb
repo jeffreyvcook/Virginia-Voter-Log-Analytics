@@ -21,11 +21,13 @@ VoterLogAnalytics::Application.routes.draw do
   end
 
   resources :voter_transaction_records do
-    match "/*path" => 'voter_transaction_records#index'
+    match "/:id(.:format)" => 'voter_transaction_records#index'
+    match "/*path/:id(.:format)" => 'voter_transaction_records#index'
   end
 
   resources :voter_transaction_logs do
-    match "/*path" => 'voter_transaction_logs#index'
+    match "/:id(.:format)" => 'voter_transaction_logs#index'
+    match "/*path/:id(.:format)" => 'voter_transaction_logs#index'
   end
 
   resources :elections

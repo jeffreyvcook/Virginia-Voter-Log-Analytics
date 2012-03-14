@@ -4,18 +4,21 @@
       &nbsp;
 
     .span8.dates
-      %h2 Virginia Voter Log Analytics
-
-      .row
-        .span4
-          %h3
-            = "Election: "+(((Selection.all.length == 0) && "None Selected") || Selection.all[0].ename)
-        .span4
-          %p
+      %table{:style=>"width:100%;"}
+        %tr
+          %td
+            %h2 Virginia Voter Log Analytics
+          %td{:style=>"text-align:right;"}
             = link_to "Manage Elections",'elections#index', class: 'primary btn'
-          %p
-            = link_to "Browse Logs",'voter_transaction_logs#index', class: 'primary btn'
+        %tr
+          %td
+            %h3= "Election: "+(((Selection.all.length == 0) && "None Selected") || Selection.all[0].ename)
+          %td{:style=>"text-align:right;padding-bottom:6px;"}
             = link_to "Browse Records",'voter_transaction_records#index', class: 'primary btn'
+        %tr
+          %td
+          %td{:style=>"text-align:right;"}
+            = link_to "Browse Logs",'voter_transaction_logs#index', class: 'primary btn'
 
   .row.main
     .span4.sidebar
@@ -39,7 +42,10 @@
     .span8
       .row
         .span8
-          There are two options for getting started:
+          -if (Selection.all.length == 0)
+            There is one option for getting started: create an election via the top-right button labelled Manage Elections.
+          -else
+            There are two options below for getting started:
 
       .row
         .span4.option
@@ -60,6 +66,6 @@
           .marker 2
           %h3 Analyze Existing Logs
           %p{:style=>"margin-bottom:27px"}
-            Analyze the voter transaction logs for a the election named above.
+            Analyze the voter transaction logs for the election named above.
           = link_to "Analyze Logs", 'analyze', class: 'primary btn'
 
