@@ -1,30 +1,41 @@
-%h3 All Voter Transaction Records
+%p#notice= notice
+
+.row
+  .span4
+    %h3
+      All Voter Transaction Records
+  .span3
+    = link_to 'Show Table', :show_xml => nil
+    \|
+    = link_to 'Show XML', :show_xml => true
+  .span3
+    %b= link_to "Download XML", voter_transaction_record_path(@voter_transaction_records, format: 'xml'), class: 'btn'
 %br
-
-%table{:style=>"text-align:center"}
-  %tr
-    %th Voter
-    %th Voter Type
-    %th Date
-    %th Action
-    %th Form
-    %th LEO
-    %th Note
-    %th
-    %th
-
-  - @voter_transaction_records.each do |voter_transaction_record|
+-if @showxml
+  %table
+    %pre= render partial: 'vtrs.xml.builder', locals: { record: @voter_transaction_records  }
+-else
+  %table{:style=>"text-align:center"}
     %tr
-      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.voter
-      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.vtype
-      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.datime
-      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.action
-      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.form
-      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.leo
-      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.note
-      %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Show', voter_transaction_record
-      %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Destroy', voter_transaction_record, :confirm => 'Are you sure?', :method => :delete
-
+      %th Voter
+      %th Voter Type
+      %th Date
+      %th Action
+      %th Form
+      %th LEO
+      %th Note
+      %th
+      %th
+    - @voter_transaction_records.each do |voter_transaction_record|
+      %tr
+        %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.voter
+        %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.vtype
+        %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.datime
+        %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.action
+        %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.form
+        %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.leo
+        %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_record.note
+        %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Show', voter_transaction_record
+        %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Destroy', voter_transaction_record, :confirm => 'Are you sure?', :method => :delete
 %br
-
 = link_to 'New Voter Transaction Record', new_voter_transaction_record_path

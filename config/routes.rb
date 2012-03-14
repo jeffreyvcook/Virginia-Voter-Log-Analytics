@@ -1,17 +1,7 @@
 VoterLogAnalytics::Application.routes.draw do
-  resources :selections
-  resources :elections
-  resources :voter_transaction_logs
-  resources :voter_transaction_records
 
 #  get "pages/front"
   root :to => "pages#front"
-
-  resource :uplift, only: [], path: '' do
-    member do
-      post :uplift
-    end
-  end
 
   resource :page, only: [], path: '' do
     member do
@@ -24,24 +14,52 @@ VoterLogAnalytics::Application.routes.draw do
     end
   end
 
-  resource :election, only: [], path: '' do
+  resource :uplift, only: [], path: '' do
     member do
-      get :index
-      get :edit
-      get :show
-      get :new
+      post :uplift
     end
   end
 
-  resource :voter_transaction_record, only: [], path: '' do
-    member do
-      get :index
-      get :edit
-      get :create
-      get :show
-      get :new
-    end
+  resources :voter_transaction_records do
+    match "/*path" => 'voter_transaction_records#index'
   end
+
+  resources :voter_transaction_logs do
+    match "/*path" => 'voter_transaction_logs#index'
+  end
+
+  resources :elections
+
+  # resource :election, only: [], path: '' do
+  #   member do
+  #     get :index
+  #     get :edit
+  #     get :show
+  #     get :new
+  #   end
+  # end
+
+  # resource :voter_transaction_record, only: [], path: '' do
+  #   member do
+  #     get :index
+  #     get :edit
+  #     get :show
+  #     get :disp
+  #     get :new
+  #   end
+  # end
+
+  # resource :voter_transaction_records, only: [], path: '' do
+  #   member do
+  #     get :index
+  #     get :edit
+  #     get :show
+  #     get :disp
+  #     get :new
+  #   end
+  # end
+
+  # resource :voter_transaction_record, only:  [ :new, :create, :disp, :show ]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

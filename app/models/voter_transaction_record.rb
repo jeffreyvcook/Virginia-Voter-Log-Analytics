@@ -18,8 +18,8 @@ class VoterTransactionRecord < ActiveRecord::Base
   end
   
   def to_voter_xml()
-    "<voterTransactionRecord>" +
-      "<voter>"+self.voter+"</voter>" +
+    "<voterTransactionRecord>\n" +
+      "<voter>"+self.voter+"</voter>&#x000A;" +
       ((self.vtype and self.vtype.length > 0) ?
        "<vtype>"+self.vtype+"</vtype>" : "") +
       "<date>"+self.datime.xmlschema+"</date>" +

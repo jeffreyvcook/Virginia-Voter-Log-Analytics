@@ -1,24 +1,35 @@
-%h3 All Voter Transaction Logs
+%p#notice= notice
+
+.row
+  .span4
+    %h3
+      All Voter Transaction Logs
+  .span3
+    = link_to 'Show Table', :show_xml => nil
+    \|
+    = link_to 'Show XML', :show_xml => true
+  .span3
+    %b= link_to "Download XML", voter_transaction_log_path(@voter_transaction_logs, format: 'xml'), class: 'btn'
 %br
-
-%table{:style=>"text-align:center"}
-  %tr
-    %th Origin
-    %th Origin UID
-    %th Date
-    %th Locale
-    %th
-    %th
-
-  - @voter_transaction_logs.each do |voter_transaction_log|
+-if @showxml
+  %table
+    %pre= render partial: 'vtls.xml.builder', locals: { record: @voter_transaction_logs  }
+-else
+  %table{:style=>"text-align:center"}
     %tr
-      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_log.origin
-      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_log.origin_uniq
-      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_log.datime
-      %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_log.locale
-      %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Show', voter_transaction_log
-      %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Destroy', voter_transaction_log, :confirm => 'Are you sure?', :method => :delete
-
+      %th Origin
+      %th Origin Uniq
+      %th Date
+      %th Locale
+      %th
+      %th
+    - @voter_transaction_logs.each do |voter_transaction_log|
+      %tr
+        %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_log.origin
+        %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_log.origin_uniq
+        %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_log.datime
+        %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_log.locale
+        %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Show', voter_transaction_log
+        %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Destroy', voter_transaction_log, :confirm => 'Are you sure?', :method => :delete
 %br
-
 = link_to 'New Voter Transaction Log', new_voter_transaction_log_path

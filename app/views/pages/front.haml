@@ -12,10 +12,10 @@
             = "Election: "+(((Selection.all.length == 0) && "None Selected") || Selection.all[0].ename)
         .span4
           %p
-            = link_to "Manage Elections",'elections#new', class: 'primary btn'
+            = link_to "Manage Elections",'elections#index', class: 'primary btn'
           %p
-            = link_to "Browse Logs",'voter_transaction_logs#new', class: 'primary btn'
-            = link_to "Browse Records",'voter_transaction_records#new', class: 'primary btn'
+            = link_to "Browse Logs",'voter_transaction_logs#index', class: 'primary btn'
+            = link_to "Browse Records",'voter_transaction_records#index', class: 'primary btn'
 
   .row.main
     .span4.sidebar
