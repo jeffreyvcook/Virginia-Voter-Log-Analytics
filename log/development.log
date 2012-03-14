@@ -46967,3 +46967,226 @@ DEPRECATION WARNING: Passing a template handler in the template name is deprecat
   Rendered voter_transaction_logs/_vtls.xml.builder (52.4ms)
   Rendered voter_transaction_logs/index.xml.builder (53.2ms)
 Completed 200 OK in 62ms (Views: 53.7ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2012-03-13 22:18:45 -0700
+DEPRECATION WARNING: ActiveSupport::Memoizable is deprecated and will be removed in future releases,simply use Ruby memoization pattern instead. (called from call_with_quiet_assets at /home/jvc/Software/Virginia-Voter-Log-Analytics/config/initializers/quiet_assets.rb:6)
+Processing by PagesController#front as HTML
+  [1m[36mSelection Load (0.1ms)[0m  [1mSELECT "selections".* FROM "selections" [0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "selections".* FROM "selections" 
+  Rendered pages/front.haml within layouts/application (79.2ms)
+  Rendered layouts/_header.haml (2.7ms)
+  Rendered layouts/_alerts_and_notices.haml (1.3ms)
+  Rendered layouts/_footer.haml (3.0ms)
+Completed 200 OK in 173ms (Views: 170.7ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/elections" for 127.0.0.1 at 2012-03-13 22:18:48 -0700
+Processing by ElectionsController#index as HTML
+  [1m[36mElection Load (0.1ms)[0m  [1mSELECT "elections".* FROM "elections" [0m
+  [1m[35mSelection Load (0.1ms)[0m  SELECT "selections".* FROM "selections" 
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "selections".* FROM "selections" [0m
+  Rendered elections/index.html.haml within layouts/application (6.8ms)
+  Rendered layouts/_header.haml (0.8ms)
+  Rendered layouts/_alerts_and_notices.haml (0.1ms)
+  Rendered layouts/_footer.haml (0.6ms)
+Completed 200 OK in 53ms (Views: 48.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/elections?id=10&select=true" for 127.0.0.1 at 2012-03-13 22:18:50 -0700
+Processing by ElectionsController#index as HTML
+  Parameters: {"id"=>"10", "select"=>"true"}
+  [1m[35mElection Load (0.2ms)[0m  SELECT "elections".* FROM "elections" 
+  [1m[36mSelection Load (0.1ms)[0m  [1mSELECT "selections".* FROM "selections" [0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "selections".* FROM "selections" 
+  Rendered elections/index.html.haml within layouts/application (2.8ms)
+  Rendered layouts/_header.haml (0.6ms)
+  Rendered layouts/_alerts_and_notices.haml (0.1ms)
+  Rendered layouts/_footer.haml (0.6ms)
+Completed 200 OK in 16ms (Views: 15.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/elections?id=9&select=true" for 127.0.0.1 at 2012-03-13 22:18:56 -0700
+Processing by ElectionsController#index as HTML
+  Parameters: {"id"=>"9", "select"=>"true"}
+  [1m[36mElection Load (0.1ms)[0m  [1mSELECT "elections".* FROM "elections" [0m
+  [1m[35mSelection Load (0.1ms)[0m  SELECT "selections".* FROM "selections" 
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "selections".* FROM "selections" [0m
+  Rendered elections/index.html.haml within layouts/application (3.7ms)
+  Rendered layouts/_header.haml (0.6ms)
+  Rendered layouts/_alerts_and_notices.haml (0.1ms)
+  Rendered layouts/_footer.haml (0.6ms)
+Completed 200 OK in 17ms (Views: 16.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/elections?id=10&select=true" for 127.0.0.1 at 2012-03-13 22:18:58 -0700
+Processing by ElectionsController#index as HTML
+  Parameters: {"id"=>"10", "select"=>"true"}
+  [1m[35mElection Load (0.1ms)[0m  SELECT "elections".* FROM "elections" 
+  [1m[36mSelection Load (0.1ms)[0m  [1mSELECT "selections".* FROM "selections" [0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "selections".* FROM "selections" 
+  Rendered elections/index.html.haml within layouts/application (33.2ms)
+  Rendered layouts/_header.haml (0.7ms)
+  Rendered layouts/_alerts_and_notices.haml (0.1ms)
+  Rendered layouts/_footer.haml (0.6ms)
+Completed 200 OK in 47ms (Views: 46.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/elections?id=10&select=true" for 127.0.0.1 at 2012-03-13 22:20:50 -0700
+Processing by ElectionsController#index as HTML
+  Parameters: {"id"=>"10", "select"=>"true"}
+  [1m[36mElection Load (0.1ms)[0m  [1mSELECT "elections".* FROM "elections" [0m
+  [1m[35mElection Load (0.2ms)[0m  SELECT "elections".* FROM "elections" WHERE "elections"."id" = ? LIMIT 1  [["id", "10"]]
+  [1m[36mSelection Load (0.1ms)[0m  [1mSELECT "selections".* FROM "selections" [0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "selections".* FROM "selections" 
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  UPDATE "selections" SET "eid" = 10, "ename" = 'Test (2012-09-21)', "updated_at" = '2012-03-14 05:20:50.366939' WHERE "selections"."id" = 1
+  [1m[36m (170.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mSelection Load (0.1ms)[0m  SELECT "selections".* FROM "selections" 
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "selections".* FROM "selections" [0m
+  Rendered elections/index.html.haml within layouts/application (3.6ms)
+  Rendered layouts/_header.haml (0.6ms)
+  Rendered layouts/_alerts_and_notices.haml (0.1ms)
+  Rendered layouts/_footer.haml (0.6ms)
+Completed 200 OK in 237ms (Views: 16.8ms | ActiveRecord: 171.8ms)
+
+
+Started GET "/elections?id=9&select=true" for 127.0.0.1 at 2012-03-13 22:20:52 -0700
+Processing by ElectionsController#index as HTML
+  Parameters: {"id"=>"9", "select"=>"true"}
+  [1m[35mElection Load (0.2ms)[0m  SELECT "elections".* FROM "elections" 
+  [1m[36mElection Load (0.1ms)[0m  [1mSELECT "elections".* FROM "elections" WHERE "elections"."id" = ? LIMIT 1[0m  [["id", "9"]]
+  [1m[35mSelection Load (0.1ms)[0m  SELECT "selections".* FROM "selections" 
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "selections".* FROM "selections" [0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mUPDATE "selections" SET "eid" = 9, "ename" = 'General (2012-11-06)', "updated_at" = '2012-03-14 05:20:52.870073' WHERE "selections"."id" = 1[0m
+  [1m[35m (43.6ms)[0m  commit transaction
+  [1m[36mSelection Load (0.1ms)[0m  [1mSELECT "selections".* FROM "selections" [0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "selections".* FROM "selections" 
+  Rendered elections/index.html.haml within layouts/application (3.0ms)
+  Rendered layouts/_header.haml (0.6ms)
+  Rendered layouts/_alerts_and_notices.haml (0.1ms)
+  Rendered layouts/_footer.haml (0.6ms)
+Completed 200 OK in 63ms (Views: 15.6ms | ActiveRecord: 44.3ms)
+
+
+Started GET "/elections?id=10&select=true" for 127.0.0.1 at 2012-03-13 22:20:54 -0700
+Processing by ElectionsController#index as HTML
+  Parameters: {"id"=>"10", "select"=>"true"}
+  [1m[36mElection Load (0.1ms)[0m  [1mSELECT "elections".* FROM "elections" [0m
+  [1m[35mElection Load (0.1ms)[0m  SELECT "elections".* FROM "elections" WHERE "elections"."id" = ? LIMIT 1  [["id", "10"]]
+  [1m[36mSelection Load (0.1ms)[0m  [1mSELECT "selections".* FROM "selections" [0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "selections".* FROM "selections" 
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  UPDATE "selections" SET "eid" = 10, "ename" = 'Test (2012-09-21)', "updated_at" = '2012-03-14 05:20:54.461590' WHERE "selections"."id" = 1
+  [1m[36m (42.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mSelection Load (0.1ms)[0m  SELECT "selections".* FROM "selections" 
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "selections".* FROM "selections" [0m
+  Rendered elections/index.html.haml within layouts/application (2.8ms)
+  Rendered layouts/_header.haml (0.8ms)
+  Rendered layouts/_alerts_and_notices.haml (0.1ms)
+  Rendered layouts/_footer.haml (0.6ms)
+Completed 200 OK in 91ms (Views: 44.9ms | ActiveRecord: 43.2ms)
+
+
+Started GET "/elections?id=9&select=true" for 127.0.0.1 at 2012-03-13 22:20:55 -0700
+Processing by ElectionsController#index as HTML
+  Parameters: {"id"=>"9", "select"=>"true"}
+  [1m[35mElection Load (0.2ms)[0m  SELECT "elections".* FROM "elections" 
+  [1m[36mElection Load (0.1ms)[0m  [1mSELECT "elections".* FROM "elections" WHERE "elections"."id" = ? LIMIT 1[0m  [["id", "9"]]
+  [1m[35mSelection Load (0.1ms)[0m  SELECT "selections".* FROM "selections" 
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "selections".* FROM "selections" [0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mUPDATE "selections" SET "eid" = 9, "ename" = 'General (2012-11-06)', "updated_at" = '2012-03-14 05:20:55.452518' WHERE "selections"."id" = 1[0m
+  [1m[35m (43.6ms)[0m  commit transaction
+  [1m[36mSelection Load (0.1ms)[0m  [1mSELECT "selections".* FROM "selections" [0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "selections".* FROM "selections" 
+  Rendered elections/index.html.haml within layouts/application (2.9ms)
+  Rendered layouts/_header.haml (0.6ms)
+  Rendered layouts/_alerts_and_notices.haml (0.1ms)
+  Rendered layouts/_footer.haml (0.6ms)
+Completed 200 OK in 63ms (Views: 15.5ms | ActiveRecord: 44.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2012-03-13 22:20:57 -0700
+Processing by PagesController#front as HTML
+  [1m[36mSelection Load (0.1ms)[0m  [1mSELECT "selections".* FROM "selections" [0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "selections".* FROM "selections" 
+  Rendered pages/front.haml within layouts/application (1.2ms)
+  Rendered layouts/_header.haml (0.8ms)
+  Rendered layouts/_alerts_and_notices.haml (0.1ms)
+  Rendered layouts/_footer.haml (0.6ms)
+Completed 200 OK in 43ms (Views: 42.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/elections" for 127.0.0.1 at 2012-03-13 22:21:00 -0700
+Processing by ElectionsController#index as HTML
+  [1m[36mElection Load (0.2ms)[0m  [1mSELECT "elections".* FROM "elections" [0m
+  [1m[35mSelection Load (0.1ms)[0m  SELECT "selections".* FROM "selections" 
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "selections".* FROM "selections" [0m
+  Rendered elections/index.html.haml within layouts/application (3.2ms)
+  Rendered layouts/_header.haml (0.6ms)
+  Rendered layouts/_alerts_and_notices.haml (0.1ms)
+  Rendered layouts/_footer.haml (0.6ms)
+Completed 200 OK in 17ms (Views: 15.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/elections?id=10&select=true" for 127.0.0.1 at 2012-03-13 22:21:01 -0700
+Processing by ElectionsController#index as HTML
+  Parameters: {"id"=>"10", "select"=>"true"}
+  [1m[35mElection Load (0.1ms)[0m  SELECT "elections".* FROM "elections" 
+  [1m[36mElection Load (0.1ms)[0m  [1mSELECT "elections".* FROM "elections" WHERE "elections"."id" = ? LIMIT 1[0m  [["id", "10"]]
+  [1m[35mSelection Load (0.1ms)[0m  SELECT "selections".* FROM "selections" 
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "selections".* FROM "selections" [0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mUPDATE "selections" SET "eid" = 10, "ename" = 'Test (2012-09-21)', "updated_at" = '2012-03-14 05:21:01.732009' WHERE "selections"."id" = 1[0m
+  [1m[35m (45.0ms)[0m  commit transaction
+  [1m[36mSelection Load (0.1ms)[0m  [1mSELECT "selections".* FROM "selections" [0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "selections".* FROM "selections" 
+  Rendered elections/index.html.haml within layouts/application (2.8ms)
+  Rendered layouts/_header.haml (0.6ms)
+  Rendered layouts/_alerts_and_notices.haml (0.1ms)
+  Rendered layouts/_footer.haml (0.6ms)
+Completed 200 OK in 64ms (Views: 15.3ms | ActiveRecord: 45.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2012-03-13 22:21:03 -0700
+Processing by PagesController#front as HTML
+  [1m[36mSelection Load (0.2ms)[0m  [1mSELECT "selections".* FROM "selections" [0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "selections".* FROM "selections" 
+  Rendered pages/front.haml within layouts/application (1.4ms)
+  Rendered layouts/_header.haml (0.7ms)
+  Rendered layouts/_alerts_and_notices.haml (0.1ms)
+  Rendered layouts/_footer.haml (0.6ms)
+Completed 200 OK in 15ms (Views: 14.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/elections" for 127.0.0.1 at 2012-03-13 22:21:06 -0700
+Processing by ElectionsController#index as HTML
+  [1m[36mElection Load (0.1ms)[0m  [1mSELECT "elections".* FROM "elections" [0m
+  [1m[35mSelection Load (0.1ms)[0m  SELECT "selections".* FROM "selections" 
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "selections".* FROM "selections" [0m
+  Rendered elections/index.html.haml within layouts/application (3.0ms)
+  Rendered layouts/_header.haml (0.6ms)
+  Rendered layouts/_alerts_and_notices.haml (0.0ms)
+  Rendered layouts/_footer.haml (0.6ms)
+Completed 200 OK in 17ms (Views: 15.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/elections?id=9&select=true" for 127.0.0.1 at 2012-03-13 22:21:08 -0700
+Processing by ElectionsController#index as HTML
+  Parameters: {"id"=>"9", "select"=>"true"}
+  [1m[35mElection Load (0.2ms)[0m  SELECT "elections".* FROM "elections" 
+  [1m[36mElection Load (0.1ms)[0m  [1mSELECT "elections".* FROM "elections" WHERE "elections"."id" = ? LIMIT 1[0m  [["id", "9"]]
+  [1m[35mSelection Load (0.1ms)[0m  SELECT "selections".* FROM "selections" 
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "selections".* FROM "selections" [0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mUPDATE "selections" SET "eid" = 9, "ename" = 'General (2012-11-06)', "updated_at" = '2012-03-14 05:21:08.140077' WHERE "selections"."id" = 1[0m
+  [1m[35m (42.4ms)[0m  commit transaction
+  [1m[36mSelection Load (0.1ms)[0m  [1mSELECT "selections".* FROM "selections" [0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "selections".* FROM "selections" 
+  Rendered elections/index.html.haml within layouts/application (2.9ms)
+  Rendered layouts/_header.haml (0.7ms)
+  Rendered layouts/_alerts_and_notices.haml (0.1ms)
+  Rendered layouts/_footer.haml (0.6ms)
+Completed 200 OK in 90ms (Views: 44.8ms | ActiveRecord: 43.0ms)
