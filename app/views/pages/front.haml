@@ -12,7 +12,10 @@
             = link_to "Manage Elections",'elections#index', class: 'primary btn'
         %tr
           %td
-            %h3= "Election: "+(((Selection.all.length == 0) && "None Selected") || Selection.all[0].ename)
+            -if ((Selection.all.length == 0) || (Selection.all[0].eid == nil) || (! Election.all.any? {|e| e.id == Selection.all[0].eid}))
+              %h3= "Election: "+(((Election.all.length == 0) && "None Specified") || "None Selected")
+            -else
+              %h3= "Election: "+Selection.all[0].ename
           %td{:style=>"text-align:right;padding-bottom:6px;"}
             = link_to "Browse Records",'voter_transaction_records#index', class: 'primary btn'
         %tr
@@ -42,10 +45,13 @@
     .span8
       .row
         .span8
-          -if (Selection.all.length == 0)
-            There is one option for getting started: create an election via the top-right button labelled Manage Elections.
+          -if ((Selection.all.length == 0) || (Selection.all[0].eid == nil) || (! Election.all.any? {|e| e.id == Selection.all[0].eid}))
+            -if (Election.all.length == 0)
+              To get started, create an election using the Manage Elections button (top right).
+            -else
+              To get started, select an election using the Manage Elections button (top right).
           -else
-            There are two options below for getting started:
+            There are two options for getting started:
 
       .row
         .span4.option

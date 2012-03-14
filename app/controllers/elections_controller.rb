@@ -2,10 +2,11 @@ class ElectionsController < ApplicationController
   # GET /elections
   def index
     @elections = Election.all
-    if (params[:select])
-      @election = Election.find(params[:id])
+    eid = (Election.all.length == 1 ? Election.all[0].id : params[:id])
+    if (params[:select] || Election.all.length == 1)
+      @election = Election.find(eid)
       ename = @election.name+" ("+@election.day.to_s+")"
-      if (Selection.all.length < 1)
+      if (Selection.all.length == 0)
         se = Selection.new(:eid => @election.id, :ename => ename)
       else
         se = Selection.all[0]
@@ -17,6 +18,7 @@ class ElectionsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
+      format.xml  { render layout: nil }
     end
   end
 
@@ -26,6 +28,7 @@ class ElectionsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
+      format.xml  { render layout: nil }
     end
   end
 
@@ -74,6 +77,15 @@ class ElectionsController < ApplicationController
     @election = Election.find(params[:id])
     @election.destroy
 
+    did = params[:id]
+    if ((Selection.all.length > 0) &&
+        ((Selection.all[0].eid == did) || (Election.all.length == 0)))
+      se = Selection.all[0]
+      se.eid = nil
+      se.ename = "None Selected"
+      se.save
+    end
+    
     respond_to do |format|
       format.html { redirect_to elections_url }
     end

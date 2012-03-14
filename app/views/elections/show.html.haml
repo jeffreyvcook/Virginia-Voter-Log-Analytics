@@ -1,7 +1,12 @@
 %p#notice= notice
 
-%h3
-  Election
+.row
+  .span4
+    %h3 Election
+  .span3
+  .span3
+    %b= link_to "Download XML", election_path(@election, format: 'xml'), class: 'btn'
+  
 %br
 
 %table{:style=>"padding:10px"}
