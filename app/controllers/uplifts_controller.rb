@@ -5,6 +5,12 @@ class UpliftsController < ApplicationController
   attr_accessor :uplift_file
 
   def uplift
+    if ((Selection.all.length == 0) || (Selection.all[0].eid == nil) ||
+        (! Election.all.any? {|e| e.id == Selection.all[0].eid}))
+      @uplift_msg = "Error: must select an Election before uploading logs."
+      render :uplift
+      return
+    end
     @uplift_msg = ""
     @uplift_xml = ""
     @uplift_err = ""
@@ -28,7 +34,7 @@ class UpliftsController < ApplicationController
 
   def validateFile(document_path)
     #use valid? on both objects
-    unless (schema = self.readXMLSchema())
+    unless (schema = self.readXMLSchema("public/xml/VTL.xsd"))
       return
     end
     unless (document = self.readXMLDocument(document_path))
@@ -61,12 +67,31 @@ class UpliftsController < ApplicationController
     end
   end
 
+  def mungeForm(type1, type2, name, number)
+    if type1.empty?
+      return ""
+    end
+    if type2.empty?
+      if name.empty? and number.empty?
+        return type1
+      else
+        return type1+" | "+(name.empty? ? " | " : " | "+name)+
+          (number.empty? ? "" : " | "+number)
+      end
+    elsif name.empty? and number.empty?
+      return type1+" | "+type2
+    else
+      return type1+" | "+type2+(name.empty? ? " | " : " | "+name)+
+        (number.empty? ? "" : " | "+number)
+    end
+  end
+
   def finalizeVTL(xml)
     origin = self.contentOrEmptyStr(xml % 'header/origin')
     ouniq = self.contentOrEmptyStr(xml % 'header/originUniq')
     logdate = self.contentOrEmptyStr(xml % 'header/date')
     locale = self.contentOrEmptyStr(xml % 'header/locale')
-    elec_id = Selection.all[0].eid # JVC this is still wrong
+    elec_id = Selection.all[0].eid
     vtl = VoterTransactionLog.new(:origin => origin,  :origin_uniq => ouniq,
                                   :datime => logdate, :locale => locale,
                                   :election_id => elec_id)
@@ -83,29 +108,24 @@ class UpliftsController < ApplicationController
       action = self.contentOrEmptyStr(vtr % 'action')
       leo = self.contentOrEmptyStr(vtr % 'leo')
       note = self.contentOrEmptyStr(vtr % 'note')
-      form = ""
+      type1 = ""
+      type2 = ""
+      name = ""
+      number = ""
       first = 0
       if (node = vtr % 'form')
         (node / 'type').each do |type|
           if (first == 0)
-            form = type.content
+            type1 = type.content
             first = 1
           elsif (first == 1)
-            form += " | "+type.content
+            type2 = type.content
             first = 2
           end
         end
-        if (first == 1)
-          form += " | "
-        end
-        form += " | "
-        if (item = self.contentOrEmptyStr(node % 'name'))
-          form += item
-        end
-        form += " | "
-        if (item = self.contentOrEmptyStr(node % 'number'))
-          form += item
-        end
+        name = self.contentOrEmptyStr(node % 'name')
+        number = self.contentOrEmptyStr(node % 'number')
+        form = mungeForm(type1, type2, name, number)
       end
       vtr = VoterTransactionRecord.new(:datime => datime, :voter => voter,
                                        :vtype => vtype, :action => action,
@@ -123,7 +143,9 @@ class UpliftsController < ApplicationController
     return true
   end
 
-  def xp(xml_text) # from http://vitobotta.com/more-methods-format-beautify-ruby-output-console-logs/
+ # from http://vitobotta.com/more-methods-format-beautify-ruby-output-console-logs/
+
+  def xp(xml_text)
     xsl = <<XSL
   <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
@@ -141,19 +163,16 @@ XSL
     puts out.to_xml
   end
 
-  def readXMLSchema
-    file = File.read("public/xml/VTL.xsd")
-    schema = Nokogiri::XML::Schema(file)
-    return schema
+  def readXMLSchema(file)
+    return Nokogiri::XML::Schema(File.read(file))
   rescue => e
     @uplift_err += "Shouldn't happen #3, invalid built-in schema. "+e.message
     render :uplift
     return false
   end
   
-  def readXMLDocument(document_path)
-    document = Nokogiri::XML(File.read(document_path))
-    return document
+  def readXMLDocument(file)
+    return Nokogiri::XML(File.open(file))
   rescue => e
     @uplift_err += "Invalid File format: "+e.message
     render :uplift

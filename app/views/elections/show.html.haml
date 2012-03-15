@@ -31,18 +31,23 @@
   %table{:style=>"text-align:center"}
     %tr
       %th Date
+      %th &nbsp;
       %th Origin
-      %th Origin UID
+      %th &nbsp;
+      %th Uniq
+      %th &nbsp;
       %th Locale
-      %th
       %th
       %th
   
     - @election.voter_transaction_logs.each do |vtl|
       %tr
         %td{:style=>"padding-right:6px;padding-left:6px"}= vtl.datime
+        %td
         %td{:style=>"padding-right:6px;padding-left:6px"}= vtl.origin
+        %td
         %td{:style=>"padding-right:6px;padding-left:6px"}= vtl.origin_uniq
+        %td
         %td{:style=>"padding-right:6px;padding-left:6px"}= vtl.locale
         %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Show', vtl
         %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Destroy', vtl, :confirm => 'Are you sure?', :method => :delete

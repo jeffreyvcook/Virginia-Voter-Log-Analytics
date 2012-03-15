@@ -36,11 +36,17 @@
   %table{:style=>"text-align:center"}
     %tr
       %th Voter
-      %th Voter Type
+      %th &nbsp;
+      %th VType
+      %th &nbsp;
       %th Date
+      %th &nbsp;
       %th Action
+      %th &nbsp;
       %th Form
+      %th &nbsp;
       %th LEO
+      %th &nbsp;
       %th Note
       %th
       %th
@@ -48,11 +54,17 @@
     - @voter_transaction_log.voter_transaction_records.each do |vtr|
       %tr
         %td{:style=>"padding-right:6px;padding-left:6px"}= vtr.voter
+        %td
         %td{:style=>"padding-right:6px;padding-left:6px"}= vtr.vtype
+        %td
         %td{:style=>"padding-right:6px;padding-left:6px"}= vtr.datime
+        %td
         %td{:style=>"padding-right:6px;padding-left:6px"}= vtr.action
+        %td
         %td{:style=>"padding-right:6px;padding-left:6px"}= vtr.form
+        %td
         %td{:style=>"padding-right:6px;padding-left:6px"}= vtr.leo
+        %td
         %td{:style=>"padding-right:6px;padding-left:6px"}= vtr.note
         %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Show', vtr
         %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Destroy', vtr, :confirm => 'Are you sure?', :method => :delete

@@ -12,22 +12,36 @@
     %b= link_to "Download XML", election_path(@elections, format: 'xml'), class: 'btn'
 
 %br
+%p
+  = [Election.all.length, Selection.all.length, Selection.all[0].eid, Selection.all[0].ename]
+%br
+  
 -if @showxml
   %table
     %pre= render partial: 'elections.xml.builder', locals: { record: @elections  }
 -else 
   %table{:style=>"text-align:center"}
     %tr
+      %th ID
+      %th &nbsp;
       %th Name
+      %th &nbsp;
       %th Date
+      %th &nbsp;
+      %th Logs
       %th 
       %th
       %th
       %th
     - @elections.each do |election|
       %tr
+        %td{:style=>"padding-right:6px;padding-left:6px"}= election.id
+        %td
         %td{:style=>"padding-right:6px;padding-left:6px"}= election.name
+        %td
         %td{:style=>"padding-right:6px;padding-left:6px"}= election.day
+        %td
+        %td{:style=>"padding-right:6px;padding-left:6px"}= election.voter_transaction_logs.length
         %td{:style=>"padding-right:6px;padding-left:6px;font-weight:bold;"}= (((Selection.all.length > 0) and (election.id == Selection.all[0].eid)) ? "&lowast;".html_safe : "" )
         %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Select', {:select => true, :id => election.id}
         %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Show', election
