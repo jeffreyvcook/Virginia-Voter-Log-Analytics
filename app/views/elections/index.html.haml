@@ -12,10 +12,6 @@
     %b= link_to "Download XML", election_path(@elections, format: 'xml'), class: 'btn'
 
 %br
-%p
-  = [Election.all.length, Selection.all.length, Selection.all[0].eid, Selection.all[0].ename]
-%br
-  
 -if @showxml
   %table
     %pre= render partial: 'elections.xml.builder', locals: { record: @elections  }
