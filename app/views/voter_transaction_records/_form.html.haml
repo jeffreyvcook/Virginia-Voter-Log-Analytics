@@ -10,10 +10,10 @@
     = f.label :voter
     = f.text_field :voter
   .field
-    = f.label :vtype
+    = f.label "Voter Type (optional)"
     = f.text_field :vtype
   .field
-    = f.label :datime
+    = f.label "Date and Time"
     = f.datetime_select :datime
   .field
     = f.label :action
@@ -22,10 +22,10 @@
     = f.label :form
     = f.text_area :form
   .field
-    = f.label :leo
+    = f.label "Local Election Official (optional)"
     = f.text_field :leo
   .field
-    = f.label :note
+    = f.label "Note (optional)"
     = f.text_field :note
   .field
     = f.label :voter_transaction_log

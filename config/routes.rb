@@ -30,7 +30,10 @@ VoterLogAnalytics::Application.routes.draw do
     match "/*path/:id(.:format)" => 'voter_transaction_logs#index'
   end
 
-  resources :elections
+  resources :elections do
+    match "/:id(.:format)" => 'elections#index'
+    match "/*path/:id(.:format)" => 'elections#index'
+  end
 
   # resource :election, only: [], path: '' do
   #   member do

@@ -1,5 +1,6 @@
-record = @voter_transaction_log
+xml.instruct!
 xml.voterTransactionLog do |vtl|
+  record = @voter_transaction_log
   records = record.voter_transaction_records
   vtl.header do |h|
     h.origin      record.origin

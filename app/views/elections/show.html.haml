@@ -2,49 +2,52 @@
 
 .row
   .span4
-    %h3 Election
+    %h2 Election
   .span3
+    = link_to 'Show Table', :show_xml => nil
+    \|
+    = link_to 'Show XML', :show_xml => true
   .span3
     %b= link_to "Download XML", election_path(@election, format: 'xml'), class: 'btn'
+
+%br
+-if @showxml
+  %table
+    %pre= render partial: 'election.xml.builder', locals: { record: @election  }
+-else
+  %table{:style=>"padding:10px"}
+    %tr
+      %td{:style=>"font-weight:bold;padding-right:10px;padding-bottom:6px;"}
+        Name:
+      %td{:style=>"padding-bottom:6px;"}= @election.name
+    %tr
+      %td{:style=>"font-weight:bold;padding-right:10px;padding-bottom:10px;"}
+        Date:
+      %td{:style=>"padding-bottom:10px;"}= @election.day
+  
+  %br
+  %h3 Voter Transaction Logs
+  %br
+  %table{:style=>"text-align:center"}
+    %tr
+      %th Date
+      %th Origin
+      %th Origin UID
+      %th Locale
+      %th
+      %th
+      %th
+  
+    - @election.voter_transaction_logs.each do |vtl|
+      %tr
+        %td{:style=>"padding-right:6px;padding-left:6px"}= vtl.datime
+        %td{:style=>"padding-right:6px;padding-left:6px"}= vtl.origin
+        %td{:style=>"padding-right:6px;padding-left:6px"}= vtl.origin_uniq
+        %td{:style=>"padding-right:6px;padding-left:6px"}= vtl.locale
+        %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Show', vtl
+        %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Destroy', vtl, :confirm => 'Are you sure?', :method => :delete
   
 %br
-
-%table{:style=>"padding:10px"}
-  %tr
-    %td{:style=>"font-weight:bold;padding-right:10px;padding-bottom:6px;"}
-      Name:
-    %td{:style=>"padding-bottom:6px;"}= @election.name
-  %tr
-    %td{:style=>"font-weight:bold;padding-right:10px;padding-bottom:10px;"}
-      Date:
-    %td{:style=>"padding-bottom:10px;"}= @election.day
-
-%br
-%h3
-  Voter Transaction Logs
-%br
-
-%table{:style=>"text-align:center"}
-  %tr
-    %th Date
-    %th Origin
-    %th Origin UID
-    %th Locale
-    %th
-    %th
-    %th
-
-  - @election.voter_transaction_logs.each do |vtl|
-    %tr
-      %td{:style=>"padding-right:6px;padding-left:6px"}= vtl.datime
-      %td{:style=>"padding-right:6px;padding-left:6px"}= vtl.origin
-      %td{:style=>"padding-right:6px;padding-left:6px"}= vtl.origin_uniq
-      %td{:style=>"padding-right:6px;padding-left:6px"}= vtl.locale
-      %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Show', vtl
-      %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Destroy', vtl, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
 = link_to 'Back', elections_path
 \|
 = link_to 'List All', elections_path

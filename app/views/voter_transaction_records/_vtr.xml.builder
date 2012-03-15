@@ -1,5 +1,6 @@
-record = @voter_transaction_record
+xml.instruct!
 xml.voterTransactionRecord do |vtr|
+  record = @voter_transaction_record
   vtr.voter  record.voter
   vtr.vtype  record.vtype unless record.vtype.blank?
   vtr.date   record.datime.xmlschema

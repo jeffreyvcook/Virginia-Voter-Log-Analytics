@@ -1,14 +1,14 @@
 %p#notice= notice
 
 .row
-  .span4
-    %h3
+  .span5
+    %h2
       All Voter Transaction Records
   .span3
     = link_to 'Show Table', :show_xml => nil
     \|
     = link_to 'Show XML', :show_xml => true
-  .span3
+  .span2
     %b= link_to "Download XML", voter_transaction_record_path(@voter_transaction_records, format: 'xml'), class: 'btn'
 %br
 -if @showxml

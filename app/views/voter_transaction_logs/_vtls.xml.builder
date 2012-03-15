@@ -1,3 +1,4 @@
+xml.instruct!
 xml.voterTransactionLogs do |vtls|
   @voter_transaction_logs.each do |record|
     records = record.voter_transaction_records

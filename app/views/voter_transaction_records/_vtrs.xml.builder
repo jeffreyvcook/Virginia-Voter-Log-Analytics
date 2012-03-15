@@ -1,3 +1,4 @@
+xml.instruct!
 xml.voterTransactionRecords do |vtrs|
   @voter_transaction_records.each do |record|
     xml.voterTransactionRecord do |vtr|

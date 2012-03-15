@@ -1,6 +1,7 @@
+xml.instruct!
 xml.election do |e|
   e.name   @election.name
-  e.date   @election.day.xmlschema
+  e.date   @election.day.xmlschema.split('T')[0]
   @election.voter_transaction_logs.each do |record|
     records = record.voter_transaction_records
     xml.voterTransactionLog do |vtl|

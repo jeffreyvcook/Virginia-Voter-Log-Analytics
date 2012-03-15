@@ -3,7 +3,7 @@
     .span4
       &nbsp;
 
-    .span8.dates
+    .span8
       %table{:style=>"width:100%;"}
         %tr
           %td
@@ -43,15 +43,13 @@
         Virginia State Board of Elections
 
     .span8
-      .row
-        .span8
-          -if ((Selection.all.length == 0) || (Selection.all[0].eid == nil) || (! Election.all.any? {|e| e.id == Selection.all[0].eid}))
-            -if (Election.all.length == 0)
-              To get started, create an election using the Manage Elections button (top right).
-            -else
-              To get started, select an election using the Manage Elections button (top right).
-          -else
-            There are two options for getting started:
+      -if ((Selection.all.length == 0) || (Selection.all[0].eid == nil) || (! Election.all.any? {|e| e.id == Selection.all[0].eid}))
+        -if (Election.all.length == 0)
+          To get started, create an election using the Manage Elections button (top right).
+        -else
+          To get started, select an election using the Manage Elections button (top right).
+      -else
+        There are two options for getting started:
 
       .row
         .span4.option
@@ -59,7 +57,7 @@
           %h3 Upload Voter Transaction Log
           %p
             Upload a voter transaction log from your computer.
-            Only XML files, with the extension .xml, are accepted for uploading.
+            Only XML files, with the extension .xml, are acceptable for uploading.
           %form{:action=>"uplift",:method=>"post",:enctype=>"multipart/form-data"}
             %input{:type=>"file",:name=>"file"}
             %input{:type=>"submit",:value=>"Upload"}
@@ -67,11 +65,10 @@
             %h4= @uplift_msg
           %p
             %h4= @uplift_err
-
+    
         .span4.option
           .marker 2
           %h3 Analyze Existing Logs
           %p{:style=>"margin-bottom:27px"}
             Analyze the voter transaction logs for the election named above.
           = link_to "Analyze Logs", 'analyze', class: 'primary btn'
-
