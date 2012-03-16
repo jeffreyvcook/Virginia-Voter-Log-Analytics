@@ -90,7 +90,7 @@ class UpliftsController < ApplicationController
     origin = self.contentOrEmptyStr(xml % 'header/origin')
     ouniq = self.contentOrEmptyStr(xml % 'header/originUniq')
     logdate = self.contentOrEmptyStr(xml % 'header/date')
-    locale = self.contentOrEmptyStr(xml % 'header/locale')
+    locale = ""
     elec_id = Selection.all[0].eid
     vtl = VoterTransactionLog.new(:origin => origin,  :origin_uniq => ouniq,
                                   :datime => logdate, :locale => locale,

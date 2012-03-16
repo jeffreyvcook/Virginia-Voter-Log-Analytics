@@ -10,7 +10,6 @@
 	      <xs:element name="origin" type="xs:string"/>
 	      <xs:element name="originUniq" type="xs:string" minOccurs="0"/>
 	      <xs:element name="date" type="xs:dateTime"/>
-	      <xs:element name="locale" type="xs:string"/>
 	    </xs:all>
 	  </xs:complexType>
 	</xs:element>

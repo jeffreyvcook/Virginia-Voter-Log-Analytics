@@ -23,8 +23,6 @@
       %th &nbsp;
       %th Date
       %th &nbsp;
-      %th Locale
-      %th &nbsp;
       %th #Records
       %th
       %th
@@ -35,8 +33,6 @@
         %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_log.origin_uniq
         %td
         %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_log.datime
-        %td
-        %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_log.locale
         %td
         %td{:style=>"padding-right:6px;padding-left:6px"}= voter_transaction_log.voter_transaction_records.length
         %td{:style=>"padding-right:6px;padding-left:6px"}= link_to 'Show', voter_transaction_log

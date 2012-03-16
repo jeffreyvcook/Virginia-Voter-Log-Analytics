@@ -4,7 +4,6 @@ class CreateVoterTransactionLogs < ActiveRecord::Migration
       t.string :origin
       t.string :origin_uniq
       t.datetime :datime
-      t.string :locale
       t.references :election
 
       t.timestamps

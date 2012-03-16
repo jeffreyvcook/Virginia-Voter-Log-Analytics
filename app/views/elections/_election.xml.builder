@@ -9,7 +9,6 @@ xml.election do |e|
         h.origin      record.origin
         h.originUniq  record.origin_uniq unless record.origin_uniq.blank?
         h.date        record.datime.xmlschema
-        h.locale      record.locale
       end
       records.each do |record|
         xml.voterTransactionRecord do |vtr|

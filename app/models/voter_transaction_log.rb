@@ -1,7 +1,6 @@
 class VoterTransactionLog < ActiveRecord::Base
   validates_presence_of :origin
   validates_presence_of :datime
-  validates_presence_of :locale
   validates_uniqueness_of :origin, :scope => [:datime, :origin_uniq],
                                    :message => "and date/time are exact duplicates of pre-existing log"
   belongs_to :election
@@ -12,8 +11,7 @@ class VoterTransactionLog < ActiveRecord::Base
       "<origin>"+self.origin+"</origin>" +
       ((self.origin_uniq and self.origin_uniq.length > 0) ?
        "<originUniq>"+self.origin_uniq+"</originUniq>" : "") +
-      "<date>"+self.datime.xmlschema+"</date>" +
-      "<locale>"+self.locale+"</locale>" + "</header>"
+      "<date>"+self.datime.xmlschema+"</date>" + "</header>"
     self.voter_transaction_records.each do |vtr|
       xml += vtr.to_voter_xml()
     end

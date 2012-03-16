@@ -10,7 +10,13 @@ VoterLogAnalytics::Application.routes.draw do
       get :about
       get :security
       get :feedback
-      get :analyze
+    end
+  end
+
+  resource :analytic, only: [], path: '' do
+    member do
+      post :analytic
+      get :analytic
     end
   end
 

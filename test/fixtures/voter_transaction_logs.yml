@@ -4,12 +4,10 @@ one:
   origin: MyString
   origin_uniq: MyString
   datime: 2012-03-07 16:19:29
-  locale: MyString
   election: 
 
 two:
   origin: MyString
   origin_uniq: MyString
   datime: 2012-03-07 16:19:29
-  locale: MyString
   election: 
